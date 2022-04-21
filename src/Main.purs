@@ -16,7 +16,7 @@ module Main
 import Prelude
 
 import Data.Array (index, length, replicate)
-import Data.Maybe (Maybe, fromMaybe)
+import Data.Maybe (Maybe(..), fromMaybe)
 import Data.String.CodeUnits (fromCharArray, toCharArray)
 import Data.Traversable (for)
 import Effect (Effect)
@@ -61,6 +61,7 @@ pickRandomChar string = do
   pure $ index charArray randomIndex
 
 generate :: Int -> String -> Effect String
+generate _ "" = pure ""
 generate len str = do
   let arrayOfEmptyChars = replicate len ' '
   charArray <- for arrayOfEmptyChars \_ -> ado
