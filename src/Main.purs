@@ -16,7 +16,7 @@ module Main
 import Prelude
 
 import Data.Array (index, length, replicate)
-import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Maybe (Maybe, fromMaybe)
 import Data.String.CodeUnits (fromCharArray, toCharArray)
 import Data.Traversable (for)
 import Effect (Effect)
