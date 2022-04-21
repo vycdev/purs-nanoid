@@ -68,7 +68,7 @@ generate len str = do
     in fromMaybe ' ' char
   pure $ fromCharArray charArray
 
--- | Generates a string of random characters of length 21 using the `defaultAlphabet`
+-- | Generates a string of random characters of length 21 using the `defaultAlphabet` which is link friendly.
 nanoId :: Effect String
 nanoId = generate 21 defaultAlphabet
 
