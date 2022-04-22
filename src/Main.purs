@@ -16,7 +16,7 @@ module Main
 import Prelude
 
 import Data.Array (index, length, replicate)
-import Data.Maybe (Maybe, fromMaybe)
+import Data.Maybe (Maybe(..), fromMaybe)
 import Data.String.CodeUnits (fromCharArray, toCharArray)
 import Data.Traversable (for)
 import Effect (Effect)
@@ -60,19 +60,20 @@ pickRandomChar string = do
   randomIndex <- randomInt 0 (len - 1)
   pure $ index charArray randomIndex
 
-generate :: Int -> String -> Effect String
-generate _ "" = pure ""
-generate len str = do
-  let arrayOfEmptyChars = replicate len ' '
-  charArray <- for arrayOfEmptyChars \_ -> ado
-    char <- pickRandomChar str
-    in fromMaybe ' ' char
-  pure $ fromCharArray charArray
+generate :: Int -> String -> Effect (Maybe String)
+generate len str
+  | len > 0 && str /= "" = do
+      let arrayOfEmptyChars = replicate len ' '
+      charArray <- for arrayOfEmptyChars \_ -> ado
+        char <- pickRandomChar str
+        in fromMaybe ' ' char
+      pure $ Just $ fromCharArray charArray
+  | otherwise = pure Nothing
 
 -- | Generates a string of random characters of length 21 using the `defaultAlphabet` which is link friendly.
-nanoId :: Effect String
+nanoId :: Effect (Maybe String)
 nanoId = generate 21 defaultAlphabet
 
 -- | Generates a string of random characters of a given length and a string of characters
-nanoId' :: Int -> String -> Effect String
+nanoId' :: Int -> String -> Effect (Maybe String)
 nanoId' = generate
