@@ -1,4 +1,4 @@
-{ name = "purs-nanoid"
+{ name = "purescript-nanoid"
 , dependencies =
   [ "arrays"
   , "console"
@@ -12,4 +12,6 @@
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs" ]
+, license = "MIT"
+, repository = "https://github.com/vycdev/purs-nanoid"
 }
